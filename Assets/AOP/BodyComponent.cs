@@ -214,6 +214,30 @@ public class BodyComponent : MonoBehaviour
         else
         {
             UpdateDataKey("primitive", shape.ToString());
+            // Add Materials to data
+            Renderer renderer = GetComponent<Renderer>();
+            if (renderer != null)
+            {
+                Material[] materials = renderer.sharedMaterials;
+                if (materials.Length > 0)
+                {
+                    string materialPaths = "[";
+                    foreach (Material material in materials)
+                    {
+                        string materialPath = AssetDatabase.GetAssetPath(material);
+                        materialPath = materialPath.Replace("Assets/Resources/", "");
+                        materialPath = materialPath.Replace(".mat", "");
+                        materialPaths += "\"" + materialPath + "\",";
+                    }
+                    materialPaths = materialPaths.TrimEnd(',');
+                    materialPaths += "]";
+                    UpdateDataKey("materials", materialPaths);
+                }
+                else
+                {
+                    RemoveDataKey("materials");
+                }
+            }
             RemoveDataKey("prefab");
         }
     }

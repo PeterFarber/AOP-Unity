@@ -5,12 +5,15 @@ using System.IO;
 using UnityEditor;
 using SimpleJSON;
 using Unity.VisualScripting;
+using Unity.Mathematics;
 
 public class MetaData
 {
     public string shape;
     public string prefab;
     public string primitive;
+    public List<string> materials;
+
     public Vector3 center;
     public Vector3 size;
     public Vector3 scale;
@@ -26,6 +29,11 @@ public class MetaData
         shape = dataJSON["shape"];
         prefab = dataJSON["prefab"];
         primitive = dataJSON["primitive"];
+        materials = new List<string>();
+        foreach (JSONNode material in dataJSON["materials"].AsArray)
+        {
+            materials.Add(material);
+        }
         center = new Vector3(dataJSON["collider"]["center"]["x"], dataJSON["collider"]["center"]["y"], dataJSON["collider"]["center"]["z"]);
         size = new Vector3(dataJSON["collider"]["size"]["x"], dataJSON["collider"]["size"]["y"], dataJSON["collider"]["size"]["z"]);
         scale = new Vector3(dataJSON["collider"]["scale"]["x"], dataJSON["collider"]["scale"]["y"], dataJSON["collider"]["scale"]["z"]);
@@ -86,34 +94,17 @@ public class ParseWorldState : MonoBehaviour
 {
     public float deltaTime;
 
-    public Texture2D normalMap;
-    public Texture2D albedoMap;
-
-    public Material bodyMaterial;
-    public Material constraintMaterial;
-
     // private Dictionary<int, Constraint> constraints = new Dictionary<int, Constraint>();
     private Dictionary<int, Body> bodies = new Dictionary<int, Body>();
 
-    // List of colors to use for materials
-    private readonly List<Color> colors = new List<Color>
-    {
-        new Color(0.4f, 0.4f, 0.4f),
-        new Color(1.0f, 0.0f, 0.0f),
-        new Color(0.0f, 1.0f, 0.0f),
-        new Color(0.0f, 0.0f, 1.0f),
-        new Color(1.0f, 1.0f, 0.0f),
-        new Color(1.0f, 0.0f, 1.0f),
-        new Color(0.0f, 1.0f, 1.0f),
-        new Color(1.0f, 1.0f, 1.0f),
-        new Color(0.5f, 0.5f, 0.5f),
-        new Color(0.5f, 0.5f, 0.0f)
-    };
+
+
 
 
     // Coroutine to parse and display the world states
     private IEnumerator Start()
     {
+
         int frame = 0;
 
         // Read and parse the JSON file
@@ -214,17 +205,37 @@ public class ParseWorldState : MonoBehaviour
     // Sets up the material for the body GameObject
     private void SetupBodyMaterial(Body body)
     {
-        Material material = new Material(bodyMaterial)
+        // Material material = new Material(bodyMaterial)
+        // {
+        //     mainTextureScale = new Vector2(body.size[0], body.size[2])
+        // };
+
+        // material.SetTexture("_BaseColorMap", albedoMap);
+        // material.SetTexture("_NormalMap", normalMap);
+
+        // // Assign a color from the predefined list
+        // Color color = colors[bodies.Count % colors.Count];
+        // material.SetColor("_BaseColor", color);
+
+        // Loop thru body.data["materials"] and add them to the body.gameObject
+        if (body.data.prefab != null)
         {
-            mainTextureScale = new Vector2(body.size[0], body.size[2])
-        };
+            return;
+        }
 
-        material.SetTexture("_BaseColorMap", albedoMap);
-        material.SetTexture("_NormalMap", normalMap);
-
-        // Assign a color from the predefined list
-        Color color = colors[bodies.Count % colors.Count];
-        material.SetColor("_BaseColor", color);
+        List<Material> materials = new List<Material>();
+        foreach (string materialPath in body.data.materials)
+        {
+            string path = materialPath.Replace("Assets/Resources/", "");
+            Debug.Log(path);
+            Material material = Resources.Load<Material>(path);
+            if (material == null)
+            {
+                Debug.Log("Material is null");
+            }
+            materials.Add(material);
+        }
+        body.gameObject.GetComponent<MeshRenderer>().SetMaterials(materials);
 
         // body.gameObject.GetComponent<MeshRenderer>().material = material;
     }
@@ -250,7 +261,7 @@ public class ParseWorldState : MonoBehaviour
         Vector3 center = body.data.center;
         Vector3 scale = body.data.scale;
 
-    
+
         // Now update the parent object's position and rotation
         Transform parentTransform = body.gameObject.transform.parent;
 

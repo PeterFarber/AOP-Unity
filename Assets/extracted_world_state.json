@@ -92,7 +92,7 @@
             ],
             "center" : [
                 5.96046447753906E-08,
-                1.0900000333786,
+                0,
                 -8.94069671630859E-08
             ],
             "radius" : 0.50000011920929,
@@ -121,30 +121,7 @@
             "maxLinearVelocity" : 500,
             "maxAngularVelocity" : 47.1238899230957,
             "gravityFactor" : 1,
-            "data" : {
-                "collider" : {
-                    "radius" : 0.50000011920929,
-                    "height" : 1,
-                    "shape" : "Cylinder",
-                    "size" : {
-                        "x" : 0,
-                        "y" : 0,
-                        "z" : 0
-                    },
-                    "center" : {
-                        "x" : 5.96046447753906E-08,
-                        "y" : 1.0900000333786,
-                        "z" : -8.94069671630859E-08
-                    },
-                    "axis" : 1,
-                    "scale" : {
-                        "x" : 1,
-                        "y" : 1,
-                        "z" : 1
-                    }
-                },
-                "primitive" : "Cylinder"
-            }
+            "data" : {"collider":{"radius":0.50000011920929,"height":1,"shape":"Cylinder","size":{"x":0,"y":0,"z":0},"center":{"x":5.96046447753906E-08,"y":0,"z":-8.94069671630859E-08},"axis":1,"scale":{"x":1,"y":1,"z":1}},"primitive":"Cylinder","materials":["Materials/URP/Prototype_512x512_Blue3"]}
         },
         {
             "position" : [
@@ -194,30 +171,7 @@
             "maxLinearVelocity" : 500,
             "maxAngularVelocity" : 47.1238899230957,
             "gravityFactor" : 1,
-            "data" : {
-                "collider" : {
-                    "radius" : 0.5,
-                    "height" : -1,
-                    "shape" : "Sphere",
-                    "size" : {
-                        "x" : 0,
-                        "y" : 0,
-                        "z" : 0
-                    },
-                    "center" : {
-                        "x" : 0,
-                        "y" : 0,
-                        "z" : 0
-                    },
-                    "axis" : -1,
-                    "scale" : {
-                        "x" : 1,
-                        "y" : 1,
-                        "z" : 1
-                    }
-                },
-                "primitive" : "Sphere"
-            }
+            "data" : {"collider":{"radius":0.5,"height":-1,"shape":"Sphere","size":{"x":0,"y":0,"z":0},"center":{"x":0,"y":0,"z":0},"axis":-1,"scale":{"x":1,"y":1,"z":1}},"primitive":"Sphere","materials":["Materials/URP/Prototype_512x512_Green1"]}
         },
         {
             "position" : [
@@ -267,30 +221,7 @@
             "maxLinearVelocity" : 500,
             "maxAngularVelocity" : 47.1238899230957,
             "gravityFactor" : 1,
-            "data" : {
-                "collider" : {
-                    "radius" : 1,
-                    "height" : 2,
-                    "shape" : "Capsule",
-                    "size" : {
-                        "x" : 0,
-                        "y" : 0,
-                        "z" : 0
-                    },
-                    "center" : {
-                        "x" : 0,
-                        "y" : 0,
-                        "z" : 0
-                    },
-                    "axis" : 1,
-                    "scale" : {
-                        "x" : 2,
-                        "y" : 2,
-                        "z" : 2
-                    }
-                },
-                "primitive" : "Capsule"
-            }
+            "data" : {"collider":{"radius":1,"height":2,"shape":"Capsule","size":{"x":0,"y":0,"z":0},"center":{"x":0,"y":0,"z":0},"axis":1,"scale":{"x":2,"y":2,"z":2}},"primitive":"Capsule","materials":["Materials/URP/Prototype_512x512_Orange"]}
         },
         {
             "position" : [
@@ -340,30 +271,7 @@
             "maxLinearVelocity" : 500,
             "maxAngularVelocity" : 47.1238899230957,
             "gravityFactor" : 1,
-            "data" : {
-                "collider" : {
-                    "radius" : -1,
-                    "height" : -1,
-                    "shape" : "Box",
-                    "size" : {
-                        "x" : 1,
-                        "y" : 1,
-                        "z" : 1
-                    },
-                    "center" : {
-                        "x" : 0,
-                        "y" : 0,
-                        "z" : 0
-                    },
-                    "axis" : -1,
-                    "scale" : {
-                        "x" : 1,
-                        "y" : 2,
-                        "z" : 1
-                    }
-                },
-                "primitive" : "Box"
-            }
+            "data" : {"collider":{"radius":-1,"height":-1,"shape":"Box","size":{"x":1,"y":1,"z":1},"center":{"x":0,"y":0,"z":0},"axis":-1,"scale":{"x":1,"y":2,"z":1}},"primitive":"Box","materials":["Materials/URP/Prototype_512x512_Blue1"]}
         },
         {
             "position" : [
@@ -413,30 +321,7 @@
             "maxLinearVelocity" : 500,
             "maxAngularVelocity" : 47.1238899230957,
             "gravityFactor" : 1,
-            "data" : {
-                "collider" : {
-                    "radius" : -1,
-                    "height" : -1,
-                    "shape" : "Box",
-                    "size" : {
-                        "x" : 1,
-                        "y" : 1,
-                        "z" : 1
-                    },
-                    "center" : {
-                        "x" : 0,
-                        "y" : 0,
-                        "z" : 0
-                    },
-                    "axis" : -1,
-                    "scale" : {
-                        "x" : 100,
-                        "y" : 1,
-                        "z" : 100
-                    }
-                },
-                "primitive" : "Box"
-            }
+            "data" : {"collider":{"radius":-1,"height":-1,"shape":"Box","size":{"x":1,"y":1,"z":1},"center":{"x":0,"y":0,"z":0},"axis":-1,"scale":{"x":100,"y":1,"z":100}},"primitive":"Box","materials":["Materials/URP/Prototype_512x512_Grey2"]}
         }
     ]
 }

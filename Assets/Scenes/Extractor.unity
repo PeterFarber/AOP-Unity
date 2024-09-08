@@ -447,12 +447,9 @@ MonoBehaviour:
       \"y\" : 1,\r\n        \"z\" : 1\r\n    }\r\n}"
   - name: primitive
     value: Cylinder
-  data: "{\r\n  \"collider\" : {\r\n    \"radius\" : 0.50000011920929,\r\n    \"height\"
-    : 1,\r\n    \"shape\" : \"Cylinder\",\r\n    \"size\" : {\r\n      \"x\" : 0,\r\n     
-    \"y\" : 0,\r\n      \"z\" : 0\r\n    },\r\n    \"center\" : {\r\n      \"x\"
-    : 5.96046447753906E-08,\r\n      \"y\" : 0,\r\n      \"z\" : -8.94069671630859E-08\r\n   
-    },\r\n    \"axis\" : 1,\r\n    \"scale\" : {\r\n      \"x\" : 1,\r\n      \"y\"
-    : 1,\r\n      \"z\" : 1\r\n    }\r\n  },\r\n  \"primitive\" : \"Cylinder\"\r\n}"
+  - name: materials
+    value: '["Prototype_512x512_Blue3"]'
+  data: '{"collider":{"radius":0.50000011920929,"height":1,"shape":"Cylinder","size":{"x":0,"y":0,"z":0},"center":{"x":5.96046447753906E-08,"y":0,"z":-8.94069671630859E-08},"axis":1,"scale":{"x":1,"y":1,"z":1}},"primitive":"Cylinder","materials":["Prototype_512x512_Blue3"]}'
 --- !u!136 &980263068
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -496,7 +493,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: f5ffb23c71776424f8f776c97d3fd190, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -605,12 +602,9 @@ MonoBehaviour:
       }\r\n}"
   - name: primitive
     value: Sphere
-  data: "{\r\n  \"collider\" : {\r\n    \"radius\" : 0.5,\r\n    \"height\" : -1,\r\n   
-    \"shape\" : \"Sphere\",\r\n    \"size\" : {\r\n      \"x\" : 0,\r\n      \"y\"
-    : 0,\r\n      \"z\" : 0\r\n    },\r\n    \"center\" : {\r\n      \"x\" : 0,\r\n     
-    \"y\" : 0,\r\n      \"z\" : 0\r\n    },\r\n    \"axis\" : -1,\r\n    \"scale\"
-    : {\r\n      \"x\" : 1,\r\n      \"y\" : 1,\r\n      \"z\" : 1\r\n    }\r\n 
-    },\r\n  \"primitive\" : \"Sphere\"\r\n}"
+  - name: materials
+    value: '["Prototype_512x512_Green1"]'
+  data: '{"collider":{"radius":0.5,"height":-1,"shape":"Sphere","size":{"x":0,"y":0,"z":0},"center":{"x":0,"y":0,"z":0},"axis":-1,"scale":{"x":1,"y":1,"z":1}},"primitive":"Sphere","materials":["Prototype_512x512_Green1"]}'
 --- !u!135 &1033383188
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -652,7 +646,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: 74117f645ca87544896e430b75e9a316, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -883,12 +877,9 @@ MonoBehaviour:
       \"x\" : 2,\r\n        \"y\" : 2,\r\n        \"z\" : 2\r\n    }\r\n}"
   - name: primitive
     value: Capsule
-  data: "{\r\n  \"collider\" : {\r\n    \"radius\" : 1,\r\n    \"height\" : 2,\r\n   
-    \"shape\" : \"Capsule\",\r\n    \"size\" : {\r\n      \"x\" : 0,\r\n      \"y\"
-    : 0,\r\n      \"z\" : 0\r\n    },\r\n    \"center\" : {\r\n      \"x\" : 0,\r\n     
-    \"y\" : 0,\r\n      \"z\" : 0\r\n    },\r\n    \"axis\" : 1,\r\n    \"scale\"
-    : {\r\n      \"x\" : 2,\r\n      \"y\" : 2,\r\n      \"z\" : 2\r\n    }\r\n 
-    },\r\n  \"primitive\" : \"Capsule\"\r\n}"
+  - name: materials
+    value: '["Prototype_512x512_Orange"]'
+  data: '{"collider":{"radius":1,"height":2,"shape":"Capsule","size":{"x":0,"y":0,"z":0},"center":{"x":0,"y":0,"z":0},"axis":1,"scale":{"x":2,"y":2,"z":2}},"primitive":"Capsule","materials":["Prototype_512x512_Orange"]}'
 --- !u!136 &1554706387
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -932,7 +923,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: d1a5903867c8f0a4a8a94c3fe36dad11, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1038,10 +1029,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   deltaTime: 0.01666667
-  normalMap: {fileID: 2800000, guid: dd29f35641da38647a1eeb1028211f1a, type: 3}
-  albedoMap: {fileID: 2800000, guid: 44ae09ed76086b14e82d37feb30c7650, type: 3}
-  bodyMaterial: {fileID: 2100000, guid: d4600b00d6d915847a32d07565d06db0, type: 2}
-  constraintMaterial: {fileID: 2100000, guid: 0f88025b2a072b4468aaaf30846d3ea0, type: 2}
 --- !u!4 &1598919338
 Transform:
   m_ObjectHideFlags: 0
@@ -1118,7 +1105,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: 0f29e3c1c576f6641b9e474f6b194480, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1207,12 +1194,9 @@ MonoBehaviour:
       }\r\n}"
   - name: primitive
     value: Box
-  data: "{\r\n  \"collider\" : {\r\n    \"radius\" : -1,\r\n    \"height\" : -1,\r\n   
-    \"shape\" : \"Box\",\r\n    \"size\" : {\r\n      \"x\" : 1,\r\n      \"y\" :
-    1,\r\n      \"z\" : 1\r\n    },\r\n    \"center\" : {\r\n      \"x\" : 0,\r\n     
-    \"y\" : 0,\r\n      \"z\" : 0\r\n    },\r\n    \"axis\" : -1,\r\n    \"scale\"
-    : {\r\n      \"x\" : 1,\r\n      \"y\" : 2,\r\n      \"z\" : 1\r\n    }\r\n 
-    },\r\n  \"primitive\" : \"Box\"\r\n}"
+  - name: materials
+    value: '["Prototype_512x512_Blue1"]'
+  data: '{"collider":{"radius":-1,"height":-1,"shape":"Box","size":{"x":1,"y":1,"z":1},"center":{"x":0,"y":0,"z":0},"axis":-1,"scale":{"x":1,"y":2,"z":1}},"primitive":"Box","materials":["Prototype_512x512_Blue1"]}'
 --- !u!1 &1801466011
 GameObject:
   m_ObjectHideFlags: 0
@@ -1568,7 +1552,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: d4600b00d6d915847a32d07565d06db0, type: 2}
+  - {fileID: 2100000, guid: 9fe0a856a63e8634ebc7077bc570ea68, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1634,12 +1618,9 @@ MonoBehaviour:
       }\r\n}"
   - name: primitive
     value: Box
-  data: "{\r\n  \"collider\" : {\r\n    \"radius\" : -1,\r\n    \"height\" : -1,\r\n   
-    \"shape\" : \"Box\",\r\n    \"size\" : {\r\n      \"x\" : 1,\r\n      \"y\" :
-    1,\r\n      \"z\" : 1\r\n    },\r\n    \"center\" : {\r\n      \"x\" : 0,\r\n     
-    \"y\" : 0,\r\n      \"z\" : 0\r\n    },\r\n    \"axis\" : -1,\r\n    \"scale\"
-    : {\r\n      \"x\" : 100,\r\n      \"y\" : 1,\r\n      \"z\" : 100\r\n    }\r\n 
-    },\r\n  \"primitive\" : \"Box\"\r\n}"
+  - name: materials
+    value: '["Prototype_512x512_Grey2"]'
+  data: '{"collider":{"radius":-1,"height":-1,"shape":"Box","size":{"x":1,"y":1,"z":1},"center":{"x":0,"y":0,"z":0},"axis":-1,"scale":{"x":100,"y":1,"z":100}},"primitive":"Box","materials":["Prototype_512x512_Grey2"]}'
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
