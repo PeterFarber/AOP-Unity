@@ -1,0 +1,332 @@
+// using System.Collections;
+// using System.Collections.Generic;
+// using UnityEngine;
+// using System.IO;
+// using UnityEditor;
+// using SimpleJSON;
+
+// [System.Serializable]
+// public class WorldState
+// {
+//     public List<Body> bodies;
+//     public List<Constraint> constraints;
+// }
+
+// [System.Serializable]
+// public class Body
+// {
+//     public int id;
+//     public string motion_type;
+//     public float[] position;
+//     public float radius;
+//     public float height;
+//     public string shape;
+//     public float[] size;
+//     public float[] rotation;
+//     public string data;
+// }
+
+// [System.Serializable]
+// public class Constraint
+// {
+//     public int id;
+//     public int body1ID;
+//     public int body2ID;
+//     public string type;
+//     public int space;
+//     public float[] point1;
+//     public float[] point2;
+//     public GameObject point1_obj;
+//     public GameObject point2_obj;
+// }
+
+// [System.Serializable]
+// public class Root
+// {
+//     public List<WorldState> worldStates;
+// }
+
+// public class ParseWorldState : MonoBehaviour
+// {
+//     public float deltaTime;
+
+//     public Texture2D normalMap;
+//     public Texture2D albedoMap;
+
+//     public Material bodyMaterial;
+//     public Material constraintMaterial;
+
+//     private Dictionary<int, Constraint> constraints = new Dictionary<int, Constraint>();
+//     private Dictionary<int, GameObject> bodies = new Dictionary<int, GameObject>();
+
+//     // List of colors to use for materials
+//     private readonly List<Color> colors = new List<Color>
+//     {
+//         new Color(0.4f, 0.4f, 0.4f),
+//         new Color(1.0f, 0.0f, 0.0f),
+//         new Color(0.0f, 1.0f, 0.0f),
+//         new Color(0.0f, 0.0f, 1.0f),
+//         new Color(1.0f, 1.0f, 0.0f),
+//         new Color(1.0f, 0.0f, 1.0f),
+//         new Color(0.0f, 1.0f, 1.0f),
+//         new Color(1.0f, 1.0f, 1.0f),
+//         new Color(0.5f, 0.5f, 0.5f),
+//         new Color(0.5f, 0.5f, 0.0f)
+//     };
+
+
+//     // Coroutine to parse and display the world states
+//     private IEnumerator Start()
+//     {
+//         int frame = 0;
+
+//         // Read and parse the JSON file
+//         string jsonString = File.ReadAllText("\\\\wsl.localhost\\Ubuntu\\home\\peterfarber\\AOLibs\\AO-Physics\\tests-loader\\simulated_world_state.json");
+//         Root root = JsonUtility.FromJson<Root>(jsonString);
+
+//         // Iterate through each world state in the JSON
+//         foreach (var worldState in root.worldStates)
+//         {
+//             // Handle each body in the world state
+//             foreach (Body body in worldState.bodies)
+//             {
+//                 GameObject obj = null;
+
+
+//                 if (!bodies.ContainsKey(body.id))
+//                 {
+
+//                     // Turn body.data into json
+//                     JSONNode data = GetDataJSON(body.data);
+
+//                     // Check if data contains prefab or primitive
+//                     if (data["prefab"] == null)
+//                     {
+//                         string primitive = data["primitive"];
+//                         body.shape = primitive;
+//                         // Create a GameObject based on the shape type
+//                         obj = CreateGameObject(body);
+
+//                     }
+//                     else
+//                     {
+//                         //Search for prefab
+//                         string prefabstr = data["prefab"];
+
+//                         // Load the prefab
+//                         GameObject prefabObj = Resources.Load<GameObject>(prefabstr);
+//                         obj = Instantiate(prefabObj);
+
+//                     }
+//                     // Set up the material for the body
+//                     SetupBodyMaterial(obj, body);
+
+//                     // Add the body to the dictionary
+//                     bodies.Add(body.id, obj);
+
+//                     // Turn body.data into json
+//                 }
+//                 else
+//                 {
+//                     // Retrieve the existing GameObject
+//                     obj = bodies[body.id];
+//                 }
+
+//                 // Update the transform and scale of the GameObject
+//                 UpdateTransform(obj, body);
+//             }
+
+//             // Destroy any bodies that are no longer present in the world state
+//             DestroyAbsentBodies(worldState);
+
+//             // Handle each constraint in the world state
+//             foreach (Constraint constraint in worldState.constraints)
+//             {
+//                 if (!constraints.ContainsKey(constraint.id))
+//                 {
+//                     // Create GameObjects for the constraint points
+//                     SetupConstraintPoints(constraint);
+
+//                     // Add the constraint to the dictionary
+//                     constraints.Add(constraint.id, constraint);
+//                 }
+//             }
+
+//             // Increment the frame count and wait for the next update
+//             frame++;
+//             yield return new WaitForSeconds(frame == 1 ? 2 : deltaTime);
+//         }
+
+//         yield return null;
+//     }
+
+//     // Creates a GameObject based on the body's shape
+//     private GameObject CreateGameObject(Body body)
+//     {
+//         GameObject obj = body.shape switch
+//         {
+//             "Box" => GameObject.CreatePrimitive(PrimitiveType.Cube),
+//             "Sphere" => GameObject.CreatePrimitive(PrimitiveType.Sphere),
+//             "Capsule" => GameObject.CreatePrimitive(PrimitiveType.Capsule),
+//             "Cylinder" => GameObject.CreatePrimitive(PrimitiveType.Cylinder),
+//             _ => null
+//         };
+
+//         return obj;
+//     }
+
+//     // Sets up the material for the body GameObject
+//     private void SetupBodyMaterial(GameObject obj, Body body)
+//     {
+//         Material material = new Material(bodyMaterial)
+//         {
+//             mainTextureScale = new Vector2(body.size[0], body.size[2])
+//         };
+
+//         material.SetTexture("_BaseColorMap", albedoMap);
+//         material.SetTexture("_NormalMap", normalMap);
+
+//         // Assign a color from the predefined list
+//         Color color = colors[bodies.Count % colors.Count];
+//         material.SetColor("_BaseColor", color);
+
+//         obj.GetComponent<MeshRenderer>().material = material;
+//     }
+
+//     // Updates the position, rotation, and scale of the body GameObject
+//     private void UpdateTransform(GameObject obj, Body body)
+//     {
+//         JSONNode data = GetDataJSON(body.data);
+
+//         Vector3 position = new Vector3(body.position[0], body.position[1], body.position[2]);
+//         Quaternion rotation = new Quaternion(body.rotation[0], body.rotation[1], body.rotation[2], body.rotation[3]);
+
+//         Vector3 center = new Vector3(data["collider"]["center"]["x"], data["collider"]["center"]["y"], data["collider"]["center"]["z"]);
+//         Vector3 size = new Vector3(data["collider"]["size"]["x"], data["collider"]["size"]["y"], data["collider"]["size"]["z"]);
+//         Vector3 scale = new Vector3(data["collider"]["scale"]["x"], data["collider"]["scale"]["y"], data["collider"]["scale"]["z"]);
+
+//         if (data["prefab"] != null)
+//         {
+//             position = new Vector3(body.position[0] - (center.x * scale.x), body.position[1] - (center.y * scale.y), body.position[2] - (center.z * scale.z));
+//         }
+//         obj.transform.SetPositionAndRotation(
+//              position,
+//              rotation
+//          );
+
+
+//         if (body.shape == "Capsule" || body.shape == "Cylinder")
+//         {
+//             obj.transform.localScale = new Vector3(body.radius * 2, body.height * 0.5f, body.radius * 2);
+//         }
+//         else
+//         {
+//             if (data["prefab"] != null)
+//             {
+//                 obj.transform.localScale = scale;
+
+//             }
+//             else
+//             {
+
+//                 obj.transform.localScale = new Vector3(body.size[0], body.size[1], body.size[2]);
+//             }
+//             // Scale the object size based by the negative of data.size
+
+//         }
+//     }
+
+//     // Destroys bodies that are not present in the current world state
+//     private void DestroyAbsentBodies(WorldState worldState)
+//     {
+//         List<int> toDestroy = new List<int>();
+
+//         foreach (int id in bodies.Keys)
+//         {
+//             if (worldState.bodies.Find(x => x.id == id) == null)
+//             {
+//                 toDestroy.Add(id);
+//             }
+//         }
+
+//         foreach (int id in toDestroy)
+//         {
+//             Destroy(bodies[id]);
+//             bodies.Remove(id);
+//         }
+//     }
+
+//     // Sets up the constraint points as GameObjects
+//     private void SetupConstraintPoints(Constraint constraint)
+//     {
+//         constraint.point1_obj = CreateConstraintPoint();
+//         constraint.point2_obj = CreateConstraintPoint();
+
+//         if (constraint.space == 0 || constraint.space == 1)
+//         {
+//             constraint.point1_obj.transform.parent = bodies[constraint.body1ID].transform;
+//             constraint.point2_obj.transform.parent = bodies[constraint.body2ID].transform;
+//         }
+
+//         constraint.point1_obj.transform.position = new Vector3(constraint.point1[0], constraint.point1[1], constraint.point1[2]);
+//         constraint.point2_obj.transform.position = new Vector3(constraint.point2[0], constraint.point2[1], constraint.point2[2]);
+//     }
+
+//     // Creates a spherical GameObject for a constraint point
+//     private GameObject CreateConstraintPoint()
+//     {
+//         GameObject pointObj = GameObject.CreatePrimitive(PrimitiveType.Sphere);
+//         Material material = new Material(constraintMaterial);
+//         pointObj.GetComponent<MeshRenderer>().material = material;
+//         pointObj.transform.localScale = new Vector3(0.35f, 0.35f, 0.35f);
+//         return pointObj;
+//     }
+
+//     // Update is called once per frame
+//     private void Update()
+//     {
+//         // Draws lines between the constraint points
+//         foreach (Constraint constraint in constraints.Values)
+//         {
+//             GameObject obj1 = bodies[constraint.body1ID];
+//             GameObject obj2 = bodies[constraint.body2ID];
+
+//             Debug.DrawLine(obj1.transform.position, obj2.transform.position, Color.green);
+//         }
+
+//         // Resets the simulation on space key press
+//         if (Input.GetKeyDown(KeyCode.Space))
+//         {
+//             ResetSimulation();
+//         }
+//     }
+
+//     // Resets the simulation by clearing bodies and constraints
+//     private void ResetSimulation()
+//     {
+//         constraints.Clear();
+
+//         foreach (GameObject obj in bodies.Values)
+//         {
+//             Destroy(obj);
+//         }
+
+//         foreach (Constraint constraint in constraints.Values)
+//         {
+//             Destroy(constraint.point1_obj);
+//             Destroy(constraint.point2_obj);
+//         }
+
+//         bodies.Clear();
+//         StopAllCoroutines();
+//         StartCoroutine(Start());
+//     }
+
+//     private JSONNode GetDataJSON(string data)
+//     {
+//         data = data.Replace("\\\"", "");
+//         data = data.Replace("\"", "");
+//         data = data.Replace("'", "\"");
+//         return JSON.Parse(data);
+//     }
+// }

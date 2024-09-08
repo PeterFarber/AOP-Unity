@@ -1,0 +1,442 @@
+{
+    "bodies" : [
+        {
+            "position" : [
+                0,
+                5.48000001907349,
+                -5.21999979019165
+            ],
+            "rotation" : [
+                0.248013645410538,
+                0,
+                0,
+                0.968756556510925
+            ],
+            "size" : [
+                2.60739469528198,
+                9.4661283493042,
+                2.62573194503784
+            ],
+            "center" : [
+                -0.00108730792999268,
+                4.68674612045288,
+                0.0418922901153564
+            ],
+            "radius" : 0,
+            "height" : 0,
+            "motionType" : "Dynamic",
+            "motionQuality" : "Discrete",
+            "layer" : "MOVING",
+            "shape" : "Box",
+            "activate" : true,
+            "enhancedInternalEdgeRemoval" : false,
+            "allowSleeping" : true,
+            "linearVelocity" : [
+                0,
+                0,
+                0
+            ],
+            "angularVelocity" : [
+                0,
+                0,
+                0
+            ],
+            "friction" : 0.200000002980232,
+            "restitution" : 0,
+            "linearDamping" : 0.0500000007450581,
+            "angularDamping" : 0.0500000007450581,
+            "maxLinearVelocity" : 500,
+            "maxAngularVelocity" : 47.1238899230957,
+            "gravityFactor" : 1,
+            "data" : {
+                "collider" : {
+                    "radius" : -1,
+                    "height" : -1,
+                    "shape" : "Box",
+                    "size" : {
+                        "x" : 5.21478939056396,
+                        "y" : 18.9322566986084,
+                        "z" : 5.25146389007568
+                    },
+                    "center" : {
+                        "x" : -0.00217461585998535,
+                        "y" : 9.37349224090576,
+                        "z" : 0.0837845802307129
+                    },
+                    "axis" : -1,
+                    "scale" : {
+                        "x" : 0.5,
+                        "y" : 0.5,
+                        "z" : 0.5
+                    }
+                },
+                "prefab" : "BellTowerPr"
+            }
+        },
+        {
+            "position" : [
+                -0.573654174804688,
+                4.35557174682617,
+                8.01000022888184
+            ],
+            "rotation" : [
+                0,
+                0,
+                0,
+                1
+            ],
+            "size" : [
+                0,
+                0,
+                0
+            ],
+            "center" : [
+                5.96046447753906E-08,
+                1.0900000333786,
+                -8.94069671630859E-08
+            ],
+            "radius" : 0.50000011920929,
+            "height" : 1,
+            "motionType" : "Dynamic",
+            "motionQuality" : "Discrete",
+            "layer" : "MOVING",
+            "shape" : "Cylinder",
+            "activate" : true,
+            "enhancedInternalEdgeRemoval" : false,
+            "allowSleeping" : true,
+            "linearVelocity" : [
+                0,
+                0,
+                0
+            ],
+            "angularVelocity" : [
+                0,
+                0,
+                0
+            ],
+            "friction" : 0.200000002980232,
+            "restitution" : 0,
+            "linearDamping" : 0.0500000007450581,
+            "angularDamping" : 0.0500000007450581,
+            "maxLinearVelocity" : 500,
+            "maxAngularVelocity" : 47.1238899230957,
+            "gravityFactor" : 1,
+            "data" : {
+                "collider" : {
+                    "radius" : 0.50000011920929,
+                    "height" : 1,
+                    "shape" : "Cylinder",
+                    "size" : {
+                        "x" : 0,
+                        "y" : 0,
+                        "z" : 0
+                    },
+                    "center" : {
+                        "x" : 5.96046447753906E-08,
+                        "y" : 1.0900000333786,
+                        "z" : -8.94069671630859E-08
+                    },
+                    "axis" : 1,
+                    "scale" : {
+                        "x" : 1,
+                        "y" : 1,
+                        "z" : 1
+                    }
+                },
+                "primitive" : "Cylinder"
+            }
+        },
+        {
+            "position" : [
+                -0.573654174804688,
+                8.14999961853027,
+                8.64999961853027
+            ],
+            "rotation" : [
+                0,
+                0,
+                0,
+                1
+            ],
+            "size" : [
+                0,
+                0,
+                0
+            ],
+            "center" : [
+                0,
+                0,
+                0
+            ],
+            "radius" : 0.5,
+            "height" : 0,
+            "motionType" : "Dynamic",
+            "motionQuality" : "Discrete",
+            "layer" : "MOVING",
+            "shape" : "Sphere",
+            "activate" : true,
+            "enhancedInternalEdgeRemoval" : false,
+            "allowSleeping" : true,
+            "linearVelocity" : [
+                0,
+                0,
+                0
+            ],
+            "angularVelocity" : [
+                0,
+                0,
+                0
+            ],
+            "friction" : 0.200000002980232,
+            "restitution" : 0,
+            "linearDamping" : 0.0500000007450581,
+            "angularDamping" : 0.0500000007450581,
+            "maxLinearVelocity" : 500,
+            "maxAngularVelocity" : 47.1238899230957,
+            "gravityFactor" : 1,
+            "data" : {
+                "collider" : {
+                    "radius" : 0.5,
+                    "height" : -1,
+                    "shape" : "Sphere",
+                    "size" : {
+                        "x" : 0,
+                        "y" : 0,
+                        "z" : 0
+                    },
+                    "center" : {
+                        "x" : 0,
+                        "y" : 0,
+                        "z" : 0
+                    },
+                    "axis" : -1,
+                    "scale" : {
+                        "x" : 1,
+                        "y" : 1,
+                        "z" : 1
+                    }
+                },
+                "primitive" : "Sphere"
+            }
+        },
+        {
+            "position" : [
+                -0.573654174804688,
+                5.09442758560181,
+                14.5699996948242
+            ],
+            "rotation" : [
+                -0.275721192359924,
+                0,
+                0,
+                0.961237668991089
+            ],
+            "size" : [
+                0,
+                0,
+                0
+            ],
+            "center" : [
+                0,
+                0,
+                0
+            ],
+            "radius" : 1,
+            "height" : 2,
+            "motionType" : "Dynamic",
+            "motionQuality" : "Discrete",
+            "layer" : "MOVING",
+            "shape" : "Capsule",
+            "activate" : true,
+            "enhancedInternalEdgeRemoval" : false,
+            "allowSleeping" : true,
+            "linearVelocity" : [
+                0,
+                0,
+                0
+            ],
+            "angularVelocity" : [
+                0,
+                0,
+                0
+            ],
+            "friction" : 0.200000002980232,
+            "restitution" : 0,
+            "linearDamping" : 0.0500000007450581,
+            "angularDamping" : 0.0500000007450581,
+            "maxLinearVelocity" : 500,
+            "maxAngularVelocity" : 47.1238899230957,
+            "gravityFactor" : 1,
+            "data" : {
+                "collider" : {
+                    "radius" : 1,
+                    "height" : 2,
+                    "shape" : "Capsule",
+                    "size" : {
+                        "x" : 0,
+                        "y" : 0,
+                        "z" : 0
+                    },
+                    "center" : {
+                        "x" : 0,
+                        "y" : 0,
+                        "z" : 0
+                    },
+                    "axis" : 1,
+                    "scale" : {
+                        "x" : 2,
+                        "y" : 2,
+                        "z" : 2
+                    }
+                },
+                "primitive" : "Capsule"
+            }
+        },
+        {
+            "position" : [
+                -0.579999983310699,
+                5.05000019073486,
+                4.15999984741211
+            ],
+            "rotation" : [
+                -0.202103659510612,
+                0,
+                0,
+                0.979364156723022
+            ],
+            "size" : [
+                1,
+                2,
+                1
+            ],
+            "center" : [
+                0,
+                0,
+                0
+            ],
+            "radius" : 0,
+            "height" : 0,
+            "motionType" : "Dynamic",
+            "motionQuality" : "Discrete",
+            "layer" : "MOVING",
+            "shape" : "Box",
+            "activate" : true,
+            "enhancedInternalEdgeRemoval" : false,
+            "allowSleeping" : true,
+            "linearVelocity" : [
+                0,
+                0,
+                0
+            ],
+            "angularVelocity" : [
+                0,
+                0,
+                0
+            ],
+            "friction" : 0.200000002980232,
+            "restitution" : 0,
+            "linearDamping" : 0.0500000007450581,
+            "angularDamping" : 0.0500000007450581,
+            "maxLinearVelocity" : 500,
+            "maxAngularVelocity" : 47.1238899230957,
+            "gravityFactor" : 1,
+            "data" : {
+                "collider" : {
+                    "radius" : -1,
+                    "height" : -1,
+                    "shape" : "Box",
+                    "size" : {
+                        "x" : 1,
+                        "y" : 1,
+                        "z" : 1
+                    },
+                    "center" : {
+                        "x" : 0,
+                        "y" : 0,
+                        "z" : 0
+                    },
+                    "axis" : -1,
+                    "scale" : {
+                        "x" : 1,
+                        "y" : 2,
+                        "z" : 1
+                    }
+                },
+                "primitive" : "Box"
+            }
+        },
+        {
+            "position" : [
+                0,
+                -0.5,
+                0
+            ],
+            "rotation" : [
+                0,
+                0,
+                0,
+                1
+            ],
+            "size" : [
+                100,
+                1,
+                100
+            ],
+            "center" : [
+                0,
+                0,
+                0
+            ],
+            "radius" : 0,
+            "height" : 0,
+            "motionType" : "Static",
+            "motionQuality" : "Discrete",
+            "layer" : "NON_MOVING",
+            "shape" : "Box",
+            "activate" : false,
+            "enhancedInternalEdgeRemoval" : false,
+            "allowSleeping" : true,
+            "linearVelocity" : [
+                0,
+                0,
+                0
+            ],
+            "angularVelocity" : [
+                0,
+                0,
+                0
+            ],
+            "friction" : 0.200000002980232,
+            "restitution" : 0,
+            "linearDamping" : 0.0500000007450581,
+            "angularDamping" : 0.0500000007450581,
+            "maxLinearVelocity" : 500,
+            "maxAngularVelocity" : 47.1238899230957,
+            "gravityFactor" : 1,
+            "data" : {
+                "collider" : {
+                    "radius" : -1,
+                    "height" : -1,
+                    "shape" : "Box",
+                    "size" : {
+                        "x" : 1,
+                        "y" : 1,
+                        "z" : 1
+                    },
+                    "center" : {
+                        "x" : 0,
+                        "y" : 0,
+                        "z" : 0
+                    },
+                    "axis" : -1,
+                    "scale" : {
+                        "x" : 100,
+                        "y" : 1,
+                        "z" : 100
+                    }
+                },
+                "primitive" : "Box"
+            }
+        }
+    ]
+}
