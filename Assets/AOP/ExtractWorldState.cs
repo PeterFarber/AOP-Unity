@@ -53,13 +53,12 @@ public class ExtractWorldState : MonoBehaviour
 
         exportWorldState.Add("bodies", bodies);
 
-        // Collect all constraints
+        // // Collect all constraints
         JSONNode constraints = new JSONArray();
 
-        foreach (var constraint in FindObjectsOfType<ConstraintComponent>())
+        foreach (var constraint in FindObjectsOfType<ConstraintBase>())
         {
-            JSONNode exportConstraint = constraint.ExportToJson();
-            constraints.Add(exportConstraint);
+            constraints.Add(constraint.ExportToJSON());
         }
 
         exportWorldState.Add("constraints", constraints);

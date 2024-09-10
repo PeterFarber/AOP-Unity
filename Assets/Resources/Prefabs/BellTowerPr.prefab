@@ -28,10 +28,10 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1058824903173118260}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0, y: 5.48, z: -5.22}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -120,10 +120,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92bbb5ab546e14c4e8bef1fa087e2204, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  position: {x: -0.0021746159, y: 14.853493, z: -5.136215}
-  rotation: {x: 0, y: -0, z: -0, w: 1}
-  size: {x: 5.2147894, y: 18.932257, z: 5.251464}
-  radius: 0
+  customID: -1244
+  position: {x: 0, y: 5.48, z: -5.22}
+  rotation: {x: 0.24801365, y: -0, z: -0, w: 0.96875656}
+  size: {x: 2.6073947, y: 9.466128, z: 2.625732}
+  center: {x: -0.0010873079, y: 4.686746, z: 0.04189229}
+  radius: 9.466128
   height: 0
   motionType: 2
   motionQuality: 0
@@ -142,20 +144,20 @@ MonoBehaviour:
   maxAngularVelocity: 47.12389
   gravityFactor: 1
   dataKeys:
+  - name: prefab
+    value: BellTowerPr
   - name: collider
     value: "{\r\n    \"radius\" : -1,\r\n    \"height\" : -1,\r\n    \"shape\" :
       \"Box\",\r\n    \"size\" : {\r\n        \"x\" : 5.21478939056396,\r\n       
       \"y\" : 18.9322566986084,\r\n        \"z\" : 5.25146389007568\r\n    },\r\n   
       \"center\" : {\r\n        \"x\" : -0.00217461585998535,\r\n        \"y\" :
       9.37349224090576,\r\n        \"z\" : 0.0837845802307129\r\n    },\r\n    \"axis\"
-      : -1,\r\n    \"scale\" : {\r\n        \"x\" : 1,\r\n        \"y\" : 1,\r\n       
-      \"z\" : 1\r\n    }\r\n}"
-  - name: primitive
-    value: Box
-  data: "{\r\n  \"collider\" : {\r\n    \"radius\" : -1,\r\n    \"height\" : -1,\r\n   
-    \"shape\" : \"Box\",\r\n    \"size\" : {\r\n      \"x\" : 5.21478939056396,\r\n     
-    \"y\" : 18.9322566986084,\r\n      \"z\" : 5.25146389007568\r\n    },\r\n   
-    \"center\" : {\r\n      \"x\" : -0.00217461585998535,\r\n      \"y\" : 9.37349224090576,\r\n     
-    \"z\" : 0.0837845802307129\r\n    },\r\n    \"axis\" : -1,\r\n    \"scale\" :
-    {\r\n      \"x\" : 1,\r\n      \"y\" : 1,\r\n      \"z\" : 1\r\n    }\r\n  },\r\n 
-    \"primitive\" : \"Box\"\r\n}"
+      : -1,\r\n    \"scale\" : {\r\n        \"x\" : 0.5,\r\n        \"y\" : 0.5,\r\n       
+      \"z\" : 0.5\r\n    }\r\n}"
+  data: "{\r\n  \"prefab\" : \"BellTowerPr\",\r\n  \"collider\" : {\r\n    \"radius\"
+    : -1,\r\n    \"height\" : -1,\r\n    \"shape\" : \"Box\",\r\n    \"size\" : {\r\n     
+    \"x\" : 5.21478939056396,\r\n      \"y\" : 18.9322566986084,\r\n      \"z\" :
+    5.25146389007568\r\n    },\r\n    \"center\" : {\r\n      \"x\" : -0.00217461585998535,\r\n     
+    \"y\" : 9.37349224090576,\r\n      \"z\" : 0.0837845802307129\r\n    },\r\n   
+    \"axis\" : -1,\r\n    \"scale\" : {\r\n      \"x\" : 0.5,\r\n      \"y\" : 0.5,\r\n     
+    \"z\" : 0.5\r\n    }\r\n  }\r\n}"

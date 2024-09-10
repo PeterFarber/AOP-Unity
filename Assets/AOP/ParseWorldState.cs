@@ -95,9 +95,15 @@ public class ParseWorldState : MonoBehaviour
     // private Dictionary<int, Constraint> constraints = new Dictionary<int, Constraint>();
     private Dictionary<int, Body> bodies = new Dictionary<int, Body>();
 
+    public GameObject bodiesParent;
 
-
-
+    void Awake(){
+        // Set all the bodies to be inactive
+        foreach (Transform child in bodiesParent.transform)
+        {
+            child.gameObject.SetActive(false);
+        }
+    }
 
     // Coroutine to parse and display the world states
     private IEnumerator Start()
