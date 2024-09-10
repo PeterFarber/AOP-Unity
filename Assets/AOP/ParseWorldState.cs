@@ -112,7 +112,8 @@ public class ParseWorldState : MonoBehaviour
         int frame = 0;
 
         // Read and parse the JSON file
-        string jsonString = File.ReadAllText("\\\\wsl.localhost\\Ubuntu\\home\\peterfarber\\AOLibs\\AO-Physics\\tests-loader\\simulated_world_state.json");
+        // string jsonString = File.ReadAllText("/Users/simo/Documents/GitHub/AO-Physics/tests-loader/simulated_world_state.json");
+        string jsonString = File.ReadAllText("/Users/simo/Documents/GitHub/AO-Physics/tests-loader/simulated_world_state.json");
         JSONNode parseWorldState = JSON.Parse(jsonString);
         JSONArray worldStates = parseWorldState["worldStates"].AsArray;
 
