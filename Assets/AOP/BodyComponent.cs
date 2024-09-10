@@ -37,6 +37,8 @@ public enum Shape { Box, Sphere, Capsule, Cylinder }
 [ExecuteInEditMode]
 public class BodyComponent : MonoBehaviour
 {
+    [ReadOnly] public int customID;
+
     [ReadOnly] public Vector3 position;
     [ReadOnly] public Quaternion rotation;
     [ReadOnly] public Vector3 size;
@@ -72,6 +74,8 @@ public class BodyComponent : MonoBehaviour
     private void Update()
     {
         Collider collider = GetComponent<Collider>();
+
+        customID = GetInstanceID();
 
         if (gameObject.isStatic)
         {

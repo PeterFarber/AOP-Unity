@@ -2,10 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
-using UnityEditor;
 using SimpleJSON;
-using Unity.VisualScripting;
-using Unity.Mathematics;
+
 
 public class MetaData
 {
@@ -205,19 +203,6 @@ public class ParseWorldState : MonoBehaviour
     // Sets up the material for the body GameObject
     private void SetupBodyMaterial(Body body)
     {
-        // Material material = new Material(bodyMaterial)
-        // {
-        //     mainTextureScale = new Vector2(body.size[0], body.size[2])
-        // };
-
-        // material.SetTexture("_BaseColorMap", albedoMap);
-        // material.SetTexture("_NormalMap", normalMap);
-
-        // // Assign a color from the predefined list
-        // Color color = colors[bodies.Count % colors.Count];
-        // material.SetColor("_BaseColor", color);
-
-        // Loop thru body.data["materials"] and add them to the body.gameObject
         if (body.data.prefab != null)
         {
             return;
@@ -227,17 +212,10 @@ public class ParseWorldState : MonoBehaviour
         foreach (string materialPath in body.data.materials)
         {
             string path = materialPath.Replace("Assets/Resources/", "");
-            Debug.Log(path);
             Material material = Resources.Load<Material>(path);
-            if (material == null)
-            {
-                Debug.Log("Material is null");
-            }
             materials.Add(material);
         }
         body.gameObject.GetComponent<MeshRenderer>().SetMaterials(materials);
-
-        // body.gameObject.GetComponent<MeshRenderer>().material = material;
     }
 
 

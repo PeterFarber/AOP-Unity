@@ -1,0 +1,333 @@
+using System.Collections.Generic;
+using UnityEngine;
+using System.IO;
+using UnityEditor;
+using System;
+
+[Serializable]
+public class SpringSettings
+{
+    public enum Mode { FrequencyAndDamping, StiffnessAndDamping };
+    public Mode mode;
+    public float stiffness;
+    public float frequency;
+
+    public float damping;
+}
+
+[Serializable]
+public class MotorSettings
+{
+    public float frequency;
+
+    public float damping;
+}
+
+[ExecuteInEditMode]
+
+public class ConstraintComponent : MonoBehaviour
+{
+    private Type previousType = Type.None;
+
+    public enum Axis { X, Y, Z };
+    public enum Type { Cone, Distance, Fixed, Gear, Hinge, Point, Pulley, Slider, None };
+
+    public enum Space { WorldSpace, LocalToBodyCOM };
+
+    public Type type = Type.None;
+    public int id;
+    public BodyComponent body1;
+    public BodyComponent body2;
+
+    public Space space;
+    public Transform point1;
+    public Transform point2;
+
+    public Transform bodyPoint1;
+    public Transform bodyPoint2;
+
+    public Transform fixedPoint1;
+    public Transform fixedPoint2;
+
+    public Axis axisX1;
+    public Axis axisY1;
+
+    public Axis axisX2;
+    public Axis axisY2;
+
+    public Axis hingeAxis1;
+    public Axis hingeAxis2;
+
+    public Axis normalAxis1;
+    public Axis normalAxis2;
+
+    public Axis twistAxis1;
+    public Axis twistAxis2;
+
+    public Axis sliderAxis1;
+    public Axis sliderAxis2;
+
+    public float minDistance;
+    public float maxDistance;
+
+    public float minLength;
+    public float maxLength;
+
+    public float numTeeth1;
+    public float numTeeth2;
+
+    public float ratio;
+
+    public float halfConeAngle;
+
+    public float limitsMin;
+    public float limitsMax;
+
+    public float maxFrictionTorque;
+    public float maxFrictionForce;
+
+    public SpringSettings springSettings;
+    public MotorSettings motorSettings;
+
+    public bool autoDetectPoint = false;
+
+    void OnDrawGizmos()
+    {
+        // Draw a yellow cube at the transform position
+        if (point1.gameObject.activeSelf)
+        {
+            Gizmos.color = Color.yellow;
+            Gizmos.DrawWireSphere(point1.position, 0.33f);
+            drawString("Point 1", point1.position, Color.white, new Vector2(0f, 5f));
+
+        }
+
+        if (point2.gameObject.activeSelf)
+        {
+            Gizmos.color = Color.blue;
+            Gizmos.DrawWireSphere(point2.position, 0.33f);
+            drawString("Point 2", point2.position, Color.white, new Vector2(0f, 5f));
+        }
+
+        if (bodyPoint1.gameObject.activeSelf)
+        {
+            Gizmos.color = Color.green;
+            Gizmos.DrawWireSphere(bodyPoint1.position, 0.33f);
+            drawString("Body Point 1", bodyPoint1.position, Color.white, new Vector2(0f, 5f));
+        }
+
+        if (bodyPoint2.gameObject.activeSelf)
+        {
+            Gizmos.color = Color.red;
+            Gizmos.DrawWireSphere(bodyPoint2.position, 0.33f);
+            drawString("Body Point 2", bodyPoint2.position, Color.white, new Vector2(0f, 5f));
+        }
+
+        if (fixedPoint1.gameObject.activeSelf)
+        {
+            Gizmos.color = Color.cyan;
+            Gizmos.DrawWireSphere(fixedPoint1.position, 0.33f);
+            drawString("Fixed Point 1", fixedPoint1.position, Color.white, new Vector2(0f, 5f));
+        }
+
+        if (fixedPoint2.gameObject.activeSelf)
+        {
+            Gizmos.color = Color.magenta;
+            Gizmos.DrawWireSphere(fixedPoint2.position, 0.33f);
+            drawString("Fixed Point 2", fixedPoint2.position, Color.white, new Vector2(0f, 5f));
+        }
+
+    }
+
+    void Update()
+    {
+        if (previousType != type)
+        {
+            previousType = type;
+            UpdateType();
+        }
+
+        if (point1 == null)
+        {
+            point1 = new GameObject().transform;
+            point1.name = "Point1";
+            point1.parent = transform;
+            point1.localPosition = new Vector3(-1, 0, 0);
+        }
+
+        if (point2 == null)
+        {
+            point2 = new GameObject().transform;
+            point2.name = "Point2";
+            point2.parent = transform;
+            point2.localPosition = new Vector3(1, 0, 0);
+        }
+
+        if (bodyPoint1 == null)
+        {
+            bodyPoint1 = new GameObject().transform;
+            bodyPoint1.name = "BodyPoint1";
+            bodyPoint1.parent = transform;
+            bodyPoint1.localPosition = new Vector3(-1, 0, 0);
+        }
+
+        if (bodyPoint2 == null)
+        {
+            bodyPoint2 = new GameObject().transform;
+            bodyPoint2.name = "BodyPoint2";
+            bodyPoint2.parent = transform;
+            bodyPoint2.localPosition = new Vector3(1, 0, 0);
+        }
+
+        if (fixedPoint1 == null)
+        {
+            fixedPoint1 = new GameObject().transform;
+            fixedPoint1.name = "FixedPoint1";
+            fixedPoint1.parent = transform;
+            fixedPoint1.localPosition = new Vector3(-1, 0, 0);
+        }
+
+        if (fixedPoint2 == null)
+        {
+            fixedPoint2 = new GameObject().transform;
+            fixedPoint2.name = "FixedPoint2";
+            fixedPoint2.parent = transform;
+            fixedPoint2.localPosition = new Vector3(1, 0, 0);
+        }
+
+    }
+
+    void UpdateType()
+    {
+        point1.gameObject.SetActive(false);
+        point2.gameObject.SetActive(false);
+        bodyPoint1.gameObject.SetActive(false);
+        bodyPoint2.gameObject.SetActive(false);
+        fixedPoint1.gameObject.SetActive(false);
+        fixedPoint2.gameObject.SetActive(false);
+
+        Debug.Log("Type changed to " + type);
+        switch (type)
+        {
+            case Type.Cone:
+                point1.gameObject.SetActive(true);
+                point2.gameObject.SetActive(true);
+                point1.localPosition = new Vector3(-1, 0, 0);
+                point2.localPosition = new Vector3(1, 0, 0);
+                twistAxis1 = Axis.Y;
+                twistAxis2 = Axis.Y;
+                halfConeAngle = 45.0f;
+                break;
+            case Type.Distance:
+                point1.gameObject.SetActive(true);
+                point2.gameObject.SetActive(true);
+                point1.localPosition = new Vector3(-1, 0, 0);
+                point2.localPosition = new Vector3(1, 0, 0);
+                minDistance = -1.0f;
+                maxDistance = -1.0f;
+                springSettings.mode = SpringSettings.Mode.FrequencyAndDamping;
+                springSettings.frequency = 0.0f;
+                springSettings.damping = 0.0f;
+                break;
+            case Type.Fixed:
+                point1.gameObject.SetActive(true);
+                point2.gameObject.SetActive(true);
+                point1.localPosition = new Vector3(-1, 0, 0);
+                point2.localPosition = new Vector3(1, 0, 0);
+                axisX1 = Axis.Y;
+                axisY1 = Axis.X;
+                axisX2 = Axis.Y;
+                axisY2 = Axis.X;
+                break;
+            case Type.Gear:
+                numTeeth1 = 1.0f;
+                numTeeth2 = 1.0f;
+                ratio = 1.0f;
+                hingeAxis1 = Axis.Y;
+                hingeAxis2 = Axis.Y;
+                break;
+            case Type.Hinge:
+                point1.gameObject.SetActive(true);
+                point2.gameObject.SetActive(true);
+                point1.localPosition = new Vector3(-1, 0, 0);
+                point2.localPosition = new Vector3(1, 0, 0);
+                hingeAxis1 = Axis.Y;
+                hingeAxis2 = Axis.Y;
+                normalAxis1 = Axis.X;
+                normalAxis2 = Axis.X;
+                limitsMin = -180.0f;
+                limitsMax = 180.0f;
+                springSettings.mode = SpringSettings.Mode.FrequencyAndDamping;
+                springSettings.frequency = 0.0f;
+                springSettings.damping = 0.0f;
+                maxFrictionTorque = 0.0f;
+                motorSettings.frequency = 0.0f;
+                motorSettings.damping = 0.0f;
+                break;
+            case Type.Point:
+                point1.gameObject.SetActive(true);
+                point2.gameObject.SetActive(true);
+                point1.localPosition = new Vector3(-1, 0, 0);
+                point2.localPosition = new Vector3(1, 0, 0);
+                break;
+            case Type.Pulley:
+                bodyPoint1.gameObject.SetActive(true);
+                bodyPoint2.gameObject.SetActive(true);
+                fixedPoint1.gameObject.SetActive(true);
+                fixedPoint2.gameObject.SetActive(true);
+                bodyPoint1.localPosition = new Vector3(-1, 0, -1);
+                bodyPoint2.localPosition = new Vector3(1, 0, -1);
+                fixedPoint1.localPosition = new Vector3(-1, 0, 1);
+                fixedPoint2.localPosition = new Vector3(1, 0, 1);
+                ratio = 1.0f;
+                minLength = 0.0f;
+                maxLength = 0.0f;
+                break;
+            case Type.Slider:
+                autoDetectPoint = false;
+                point1.gameObject.SetActive(true);
+                point2.gameObject.SetActive(true);
+                point1.localPosition = new Vector3(-1, 0, 0);
+                point2.localPosition = new Vector3(1, 0, 0);
+                sliderAxis1 = Axis.X;
+                sliderAxis2 = Axis.X;
+                normalAxis1 = Axis.Y;
+                normalAxis2 = Axis.Y;
+                limitsMin = float.MinValue;
+                limitsMax = float.MaxValue;
+                springSettings.mode = SpringSettings.Mode.FrequencyAndDamping;
+                springSettings.frequency = 0.0f;
+                springSettings.damping = 0.0f;
+                break;
+        }
+    }
+
+
+    static public void drawString(string text, Vector3 worldPosition, Color textColor, Vector2 anchor, float textSize = 15f)
+    {
+#if UNITY_EDITOR
+        var view = UnityEditor.SceneView.currentDrawingSceneView;
+        if (!view)
+            return;
+        Vector3 screenPosition = view.camera.WorldToScreenPoint(worldPosition);
+        if (screenPosition.y < 0 || screenPosition.y > view.camera.pixelHeight || screenPosition.x < 0 || screenPosition.x > view.camera.pixelWidth || screenPosition.z < 0)
+            return;
+        var pixelRatio = UnityEditor.HandleUtility.GUIPointToScreenPixelCoordinate(Vector2.right).x - UnityEditor.HandleUtility.GUIPointToScreenPixelCoordinate(Vector2.zero).x;
+        UnityEditor.Handles.BeginGUI();
+        var style = new GUIStyle(GUI.skin.label)
+        {
+            fontSize = (int)textSize,
+            normal = new GUIStyleState() { textColor = textColor }
+        };
+        Vector2 size = style.CalcSize(new GUIContent(text)) * pixelRatio;
+        var alignedPosition =
+            ((Vector2)screenPosition +
+            size * ((anchor + Vector2.left + Vector2.up) / 2f)) * (Vector2.right + Vector2.down) +
+            Vector2.up * view.camera.pixelHeight;
+        GUI.Label(new Rect(alignedPosition / pixelRatio, size / pixelRatio), text, style);
+        UnityEditor.Handles.EndGUI();
+#endif
+    }
+
+}
+

@@ -1,0 +1,131 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &825050545117342618
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7899290983867112789}
+  - component: {fileID: 3101923186201204911}
+  m_Layer: 0
+  m_Name: Constraint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7899290983867112789
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 825050545117342618}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -6.48, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3101923186201204911
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 825050545117342618}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 42700718a2d22a4468d80caa14245cc3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  space: 1
+  constraintType: 8
+  id: 0
+  body1: {fileID: 0}
+  body2: {fileID: 0}
+  coneConstraint:
+    point1: {fileID: 0}
+    twistAxis1: 1
+    point2: {fileID: 0}
+    twistAxis2: 1
+    halfConeAngle: 0
+  distanceConstraint:
+    point1: {fileID: 0}
+    point2: {fileID: 0}
+    minDistance: -1
+    maxDistance: -1
+    springSettings:
+      mode: 0
+      stiffness: 0
+      frequency: 0
+      damping: 0
+  fixedConstraint:
+    autoDetectPoint: 0
+    point1: {fileID: 0}
+    axisX1: 1
+    axisY1: 0
+    point2: {fileID: 0}
+    axisX2: 1
+    axisY2: 0
+  gearConstraint:
+    point1: {fileID: 0}
+    numTeeth1: 0
+    hingeAxis1: 0
+    point2: {fileID: 0}
+    numTeeth2: 0
+    hingeAxis2: 0
+    ratio: 0
+  hingeConstraint:
+    point1: {fileID: 0}
+    hingeAxis1: 1
+    normalAxis1: 0
+    point2: {fileID: 0}
+    hingeAxis2: 1
+    normalAxis2: 0
+    limitsMin: -180
+    limitsMax: 180
+    springSettings:
+      mode: 0
+      stiffness: 0
+      frequency: 0
+      damping: 0
+    maxFrictionTorque: 0
+    motorSettings:
+      frequency: 0
+      damping: 0
+  pointConstraint:
+    point1: {fileID: 0}
+    point2: {fileID: 0}
+  pulleyConstraint:
+    bodyPoint1: {fileID: 0}
+    fixedPoint1: {fileID: 0}
+    bodyPoint2: {fileID: 0}
+    fixedPoint2: {fileID: 0}
+    ratio: 1
+    minLength: 0
+    maxLength: 0
+  sliderConstraint:
+    autoDetectPoint: 0
+    point1: {fileID: 0}
+    sliderAxis1: 0
+    normalAxis1: 1
+    point2: {fileID: 0}
+    sliderAxis2: 0
+    normalAxis2: 1
+    limitsMax: -3.4028235e+38
+    limitsMin: 3.4028235e+38
+    springSettings:
+      mode: 0
+      stiffness: 0
+      frequency: 0
+      damping: 0
+    maxFrictionForce: 0
+    motorSettings:
+      frequency: 0
+      damping: 0
