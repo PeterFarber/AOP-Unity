@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace AO
 {
-    public static class NetworkUtils
+    public static class GraphQLUtils
     {
         private const string GRAPHQL_URL = "https://arweave-search.goldsky.com/graphql"; // Updated URL
 
@@ -36,9 +36,6 @@ namespace AO
 
             // Manually build the payload string
             string payload = "{\"operationName\":null,\"variables\":{},\"query\":\"" + cleanedQuery + "\"}";
-
-            // Log the payload for debugging
-            Debug.Log(payload);
 
             // Create the UnityWebRequest
             UnityWebRequest request = new UnityWebRequest(GRAPHQL_URL, "POST");
@@ -90,11 +87,11 @@ namespace AO
     public class GraphQLNode
     {
         public string id;
-        public List<Tag> tags;
+        public List<GraphQLTag> tags;
     }
 
     [System.Serializable]
-    public class Tag
+    public class GraphQLTag
     {
         public string name;
         public string value;
@@ -105,5 +102,7 @@ namespace AO
     {
         public string id;
         public string name;
+        public string module;
+        public string scheduler;
     }
 }

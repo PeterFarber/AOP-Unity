@@ -1,19 +1,20 @@
-using UnityEngine;
 using System.IO;
 using SimpleJSON;
+using UnityEngine;
 using static AOP.Helpers;
 
-public class ExtractWorldState : MonoBehaviour
+public static class AOSceneExporter
 {
-    public string filePath = "Assets/extracted_world_state.json";
-
-    public void ExportSceneToJson()
+    public static string ExportSceneToJson(string worldName, string worldDescription, string imageURL)
     {
         JSONNode exportWorldState = new JSONObject();
         JSONNode bodies = new JSONArray();
 
-        // Collect all bodies
-        foreach (var body in FindObjectsOfType<BodyComponent>())
+        exportWorldState["name"] = worldName;
+        exportWorldState["description"] = worldDescription;
+        exportWorldState["imageTXID"] = imageURL;
+
+        foreach (var body in Object.FindObjectsOfType<BodyComponent>())
         {
             JSONNode exportBody = new JSONObject();
             exportBody.Add("customID", body.customID);
@@ -22,7 +23,6 @@ public class ExtractWorldState : MonoBehaviour
             exportBody.Add("size", ConvertVectorToJSONArray(body.size));
             exportBody.Add("center", ConvertVectorToJSONArray(body.center));
 
-            // Add simple properties
             exportBody.Add("radius", body.radius);
             exportBody.Add("height", body.height);
             exportBody.Add("motionType", body.motionType.ToString());
@@ -33,7 +33,6 @@ public class ExtractWorldState : MonoBehaviour
             exportBody.Add("enhancedInternalEdgeRemoval", body.enhancedInternalEdgeRemoval);
             exportBody.Add("allowSleeping", body.allowSleeping);
 
-            // Add velocities and dynamics
             exportBody.Add("linearVelocity", ConvertVectorToJSONArray(body.linearVelocity));
             exportBody.Add("angularVelocity", ConvertVectorToJSONArray(body.angularVelocity));
             exportBody.Add("friction", body.friction);
@@ -44,7 +43,6 @@ public class ExtractWorldState : MonoBehaviour
             exportBody.Add("maxAngularVelocity", body.maxAngularVelocity);
             exportBody.Add("gravityFactor", body.gravityFactor);
 
-            // Add custom data
             JSONNode data = JSON.Parse(body.data);
             exportBody.Add("data", data);
 
@@ -53,20 +51,16 @@ public class ExtractWorldState : MonoBehaviour
 
         exportWorldState.Add("bodies", bodies);
 
-        // // Collect all constraints
         JSONNode constraints = new JSONArray();
-
-        foreach (var constraint in FindObjectsOfType<ConstraintBase>())
+        foreach (var constraint in Object.FindObjectsOfType<ConstraintBase>())
         {
             constraints.Add(constraint.ExportToJSON());
         }
 
         exportWorldState.Add("constraints", constraints);
 
-        // Write JSON to file
-        File.WriteAllText(filePath, exportWorldState.ToString(4));
+        string output = exportWorldState.ToString(4);
 
-        Debug.Log($"World state exported to {filePath}");
+        return output;
     }
-
 }

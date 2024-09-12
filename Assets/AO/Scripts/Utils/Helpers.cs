@@ -25,6 +25,7 @@ namespace AOP
             array.Add(quaternion.w);
             return array;
         }
+
         public static JSONArray ConvertAxisToJsonArray(Axis axis)
         {
             JSONArray array = new JSONArray();
@@ -66,5 +67,16 @@ namespace AOP
             return json;
         }
 
+        public static string StripANSICodes(string input)
+        {
+            return System.Text.RegularExpressions.Regex.Replace(input, @"\x1B[@-_][0-?]*[ -/]*[@-~]", string.Empty);
+        }
+
+        public static string ShortenProcessID(string id)
+        {
+            if (id.Length > 6)
+                return $"{id.Substring(0, 3)}...{id.Substring(id.Length - 3)}";
+            return id;
+        }
     }
 }

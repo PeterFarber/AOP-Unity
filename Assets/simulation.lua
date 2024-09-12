@@ -1,7 +1,10 @@
-{
-    "name" : "Test",
-    "description" : "Super test",
-    "imageURL" : "",
+
+            local json = require('json')
+            WorldState = json.decode([[
+        {
+    "name" : "Second test",
+    "description" : "This is the good one",
+    "imageTXID" : "",
     "bodies" : [
         {
             "customID" : 26892,
@@ -3430,3 +3433,20 @@
         }
     ]
 }
+        ]])
+
+            Handlers.add(
+                'GetWorldInfo',
+                Handlers.utils.hasMatchingTag('Action', 'GetWorldInfo'),
+                function(Msg)
+                    local worldInfo = require('json').encode({
+                        WorldInfo = WorldState
+                    })
+
+                    ao.send({
+                        Target = Msg.From,
+                        Action = 'WorldInfo',
+                        Data = worldInfo
+                    })
+                end
+            )

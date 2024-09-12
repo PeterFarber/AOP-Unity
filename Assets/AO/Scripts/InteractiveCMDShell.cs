@@ -33,7 +33,6 @@ public class InteractiveCMDShell
             shell = "/bin/bash"; // Assume bash for Linux
         }
 
-        Debug.Log("Opening shell: " + shell);
         startInfo = new System.Diagnostics.ProcessStartInfo(shell)
         {
             UseShellExecute = false,
@@ -41,7 +40,7 @@ public class InteractiveCMDShell
             RedirectStandardOutput = true,
             RedirectStandardError = true, // Capture any errors
             CreateNoWindow = true,
-            WorkingDirectory = Application.dataPath + "/StreamingAssets" // Set appropriate working directory
+            WorkingDirectory = Application.dataPath // Set appropriate working directory
         };
 
         // Set environment variables to ensure commands like 'aos' are recognized
@@ -60,7 +59,7 @@ public class InteractiveCMDShell
             }
 
             output = process.StandardOutput;
-            Debug.Log("Shell started successfully.");
+            // Debug.Log("Shell started successfully.");
 
             thread = new System.Threading.Thread(Thread);
             thread.Start();
@@ -148,7 +147,6 @@ public class InteractiveCMDShell
                     lineBuffer += (char)c; // Append character to the buffer
                 }
             }
-            Debug.Log("CMDProcess Thread finished");
         }
         catch (Exception e)
         {
