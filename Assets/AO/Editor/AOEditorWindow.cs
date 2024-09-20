@@ -6,7 +6,6 @@ using AO;
 using static AOP.Helpers;
 using System.Collections;
 using System.IO;
-using System;
 using SimpleJSON;
 
 public class AOEditorWindow : EditorWindow
@@ -48,7 +47,7 @@ public class AOEditorWindow : EditorWindow
     private double lastFrameTime = 0;
     private string[] loadingFrames = new string[] { "Loading", "Loading.", "Loading..", "Loading..." };
 
-    [MenuItem("AO/AO Manager")]
+    [MenuItem("AO/AO Manager", priority = 0)]
     public static void ShowWindow()
     {
         if (windowInstance != null)
@@ -56,7 +55,7 @@ public class AOEditorWindow : EditorWindow
             windowInstance.Close();
         }
         windowInstance = (AOEditorWindow)GetWindow(typeof(AOEditorWindow));
-        windowIcon = (Texture2D)AssetDatabase.LoadAssetAtPath("Assets/AO/Editor/Icons/AO.png", typeof(Texture2D));
+        windowIcon = (Texture2D)EditorGUIUtility.Load("Assets/AO/Editor/Icons/AO.png");
         windowInstance.titleContent = new GUIContent("AO Manager", windowIcon);
         windowInstance.Show();
     }
@@ -357,7 +356,9 @@ public class AOEditorWindow : EditorWindow
                         Data = worldInfo
                     })
                 end
-            )";
+            )
+            
+            return 'World state succesfully updated";
 
         // Replace the placeholder __worldstate__ with the actual JSON data
         string luaScript = luaScriptTemplate.Replace("__worldstate__", sceneData);

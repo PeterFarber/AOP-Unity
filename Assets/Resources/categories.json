@@ -1,0 +1,76 @@
+{
+    "categories": [
+      {
+        "name": "Vehicles",
+        "subcategories": [
+          "Cars",
+          "Trucks",
+          "Boats",
+          "Aircraft",
+          "Other"
+        ]
+      },
+      {
+        "name": "Characters",
+        "subcategories": [
+          "Humans",
+          "Fantasy",
+          "Sci-Fi",
+          "Other"
+        ]
+      },
+      {
+        "name": "Animals",
+        "subcategories": [
+          "Mammals",
+          "Birds",
+          "Fish",
+          "Reptiles",
+          "Insects",
+          "Other"
+        ]
+      },
+      {
+        "name": "Architecture",
+        "subcategories": [
+          "Buildings",
+          "Interiors",
+          "Landmarks",
+          "Exteriors",
+          "Other"
+        ]
+      },
+      {
+        "name": "Furniture",
+        "subcategories": [
+          "Tables",
+          "Chairs",
+          "Sofas",
+          "Beds",
+          "Cabinets",
+          "Other"
+        ]
+      },
+      {
+        "name": "Landscapes",
+        "subcategories": [
+          "Mountains",
+          "Trees",
+          "Waterfalls",
+          "Forests",
+          "Beaches",
+          "Other"
+        ]
+      },
+      {
+        "name": "Technology",
+        "subcategories": [
+          "Devices",
+          "Gadgets",
+          "Robotics",
+          "Weapons",
+          "Other"
+        ]
+      }
+    ]
+  }
